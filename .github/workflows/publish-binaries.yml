@@ -1,0 +1,17 @@
+name: Publish and upload as artifact
+
+on: [label]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.2.0
+    - name: Publish
+      run: dotnet publish --runtime win10-x64 --output bin/dist/win /p:TrimUnusedDependencies=true
+    
